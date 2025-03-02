@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-4">
+    <h2 class="text-2xl font-bold mb-4">Welcome, {{ user.username }}</h2>
+    {% if profile_missing %}
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <strong class="font-bold">Profile Missing!</strong>
+            <span class="block sm:inline">Please create your profile to access your bookings.</span>
+            <a href="{% url 'create_student_profile' %}" class="text-blue-500 underline">Create Profile</a>
+        </div>
+    {% else %}
+        <h3 class="text-xl mb-2">Your Bookings</h3>
+        <ul class="bg-white shadow-md rounded-lg p-4">
+            {% for booking in bookings %}
+            <li class="border-b py-2">
+                <span class="font-semibold">Bus:</span> {{ booking.bus.bus_number }} - 
+                <span class="font-semibold">Date:</span> {{ booking.date }} - 
+                <span class="font-semibold">Status:</span> {{ booking.status }} - 
+                <span class="font-semibold">Pickup:</span> {{ booking.pickup_location }} - 
+                <span class="font-semibold">Drop-off:</span> {{ booking.dropoff_location }}
+            </li>
+            {% empty %}
+            <li class="py-2">No bookings found.</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'bus_list' %}" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded">Book a Bus</a>
+    {% endif %}
+</div>
+{% endblock %}

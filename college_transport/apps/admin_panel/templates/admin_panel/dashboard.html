@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h2>Welcome, {{ user.username }}</h2>
+<h3>System Overview</h3>
+<ul>
+    <li>Total Buses: {{ bus_count }}</li>
+    <li>Total Routes: {{ route_count }}</li>
+</ul>
+<a href="{% url 'manage_buses' %}">Manage Buses</a>
+<a href="{% url 'assign_routes' %}">Assign Routes</a>
+{% endblock %}
+

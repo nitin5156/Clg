@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Booking Successful{% endblock %}
+
+{% block content %}
+<h2>Booking Successful</h2>
+<p>Your booking has been confirmed.</p>
+<p>Booking Details:</p>
+<ul>
+    <li>Bus: {{ booking.bus.bus_number }}</li>
+    <li>Date: {{ booking.date }}</li>
+    <li>Status: {{ booking.status }}</li>
+</ul>
+<a href="{% url 'student_dashboard' %}">Return to Dashboard</a>
+{% endblock %}
+

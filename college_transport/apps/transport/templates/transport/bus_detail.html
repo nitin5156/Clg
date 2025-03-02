@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Bus Details{% endblock %}
+
+{% block content %}
+<h2>Bus Details</h2>
+<p>Bus Number: {{ bus.bus_number }}</p>
+<p>Capacity: {{ bus.capacity }}</p>
+<p>Driver: {{ bus.driver.user.username }}</p>
+<h3>Routes</h3>
+<ul>
+    {% for route in bus.route_set.all %}
+    <li>{{ route.name }} - {{ route.start_point }} to {{ route.end_point }}</li>
+    {% empty %}
+    <li>No routes assigned to this bus.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
+

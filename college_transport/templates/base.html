@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}College Transport System{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50">
+    <header class="bg-white shadow">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="text-xl font-bold text-indigo-600">CTS</span>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <div class="hidden md:ml-6 md:flex md:space-x-8">
+                        <a href="{% url 'home' %}" class="text-gray-600 hover:text-indigo-600 hover:border-indigo-500 inline-flex items-center px-1 pt-1 border-b-2 border-transparent">
+                            Home
+                        </a>
+                        {% if user.is_authenticated %}
+                            {% if user.user_type == 'student' %}
+                                <a href="{% url 'student_dashboard' %}" class="text-gray-600 hover:text-indigo-600 hover:border-indigo-500 inline-flex items-center px-1 pt-1 border-b-2 border-transparent">
+                                    Dashboard
+                                </a>
+                                <a href="{% url 'bus_list' %}" class="text-gray-600 hover:text-indigo-600 hover:border-indigo-500 inline-flex items-center px-1 pt-1 border-b-2 border-transparent">
+                                    Buses
+                                </a>
+                            {% elif user.user_type == 'driver' %}
+                                <a href="{% url 'driver_dashboard' %}" class="text-gray-600 hover:text-indigo-600 hover:border-indigo-500 inline-flex items-center px-1 pt-1 border-b-2 border-transparent">
+                                    Dashboard
+                                </a>
+                                <a href="{% url 'driver_logs' %}" class="text-gray-600 hover:text-indigo-600 hover:border-indigo-500 inline-flex items-center px-1 pt-1 border-b-2 border-transparent">
+                                    Logs
+                                </a>
+                            {% elif user.user_type == 'admin' %}
+                                <a href="{% url 'admin_dashboard' %}" class="text-gray-600 hover:text-indigo-600 hover:border-indigo-500 inline-flex items-center px-1 pt-1 border-b-2 border-transparent">
+                                    Dashboard
+                                </a>
+                                <a href="{% url 'manage_buses' %}" class="text-gray-600 hover:text-indigo-600 hover:border-indigo-500 inline-flex items-center px-1 pt-1 border-b-2 border-transparent">
+                                    Manage Buses
+                                </a>
+                                <a href="{% url 'assign_routes' %}" class="text-gray-600 hover:text-indigo-600 hover:border-indigo-500 inline-flex items-center px-1 pt-1 border-b-2 border-transparent">
+                                    Assign Routes
+                                </a>
+                            {% endif %}
+                            <a href="{% url 'logout' %}" class="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-600">
+                                Logout
+                            </a>
+                        {% else %}
+                            <a href="{% url 'login' %}" class="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                                Login
+                            </a>
+                            <a href="{% url 'signup' %}" class="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-600">
+                                Sign Up
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="bg-white shadow rounded-lg p-6">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+
+    <footer class="bg-gray-800">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <p class="text-gray-300">&copy; 2023 College Transport System</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-300 hover:text-white">
+                        Privacy Policy
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-white">
+                        Terms of Service
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-white">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

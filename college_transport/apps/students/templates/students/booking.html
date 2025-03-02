@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Book a Bus{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-4">
+    <h2 class="text-2xl font-bold mb-4">Book a Bus</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded">Book</button>
+    </form>
+    <h3 class="text-xl mt-4">Available Buses</h3>
+    <ul class="bg-white shadow-md rounded-lg p-4">
+        {% for bus in buses %}
+        <li class="border-b py-2">
+            <span class="font-semibold">Bus Number:</span> {{ bus.bus_number }} - 
+            <span class="font-semibold">Route:</span> {{ bus.route }} - 
+            <span class="font-semibold">Capacity:</span> {{ bus.capacity }}
+        </li>
+        {% empty %}
+        <li class="py-2">No buses available.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

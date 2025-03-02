@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Driver Logs{% endblock %}
+
+{% block content %}
+<h2>Driver Logs</h2>
+<ul>
+    {% for log in logs %}
+    <li>{{ log.date }} - {{ log.start_time }} to {{ log.end_time }}</li>
+    {% empty %}
+    <li>No logs available.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
+

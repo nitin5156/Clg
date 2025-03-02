@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Driver Dashboard{% endblock %}
+
+{% block content %}
+<h2>Welcome, {{ user.username }}</h2>
+<h3>Recent Logs</h3>
+<ul>
+    {% for log in logs %}
+    <li>{{ log.date }} - {{ log.start_time }} to {{ log.end_time }}</li>
+    {% empty %}
+    <li>No recent logs.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'driver_logs' %}">View All Logs</a>
+
+<h3>Recent Leave Applications</h3>
+<ul>
+    {% for leave in leave_applications %}
+    <li>{{ leave.start_date }} to {{ leave.end_date }} - Status: {{ leave.status }}</li>
+    {% empty %}
+    <li>No recent leave applications.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'leave_application' %}">Apply for Leave</a>
+{% endblock %}
+

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Routes{% endblock %}
+
+{% block content %}
+<h2>Available Routes</h2>
+<ul>
+    {% for route in routes %}
+    <li>{{ route.name }} - {{ route.start_point }} to {{ route.end_point }} (Bus: {{ route.bus.bus_number }})</li>
+    {% empty %}
+    <li>No routes available.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
